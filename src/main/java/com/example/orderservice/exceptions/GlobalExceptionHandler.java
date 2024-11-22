@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponseDto> handleNotFoundException(
       NotFoundException exception, HttpServletRequest httpServletRequest) {
     return new ResponseEntity<>(
-        new ErrorResponseDto(httpServletRequest.getRequestURI(), exception.getMessage()),
+        new ErrorResponseDto(exception.getMessage(), httpServletRequest.getRequestURI()),
         HttpStatus.NOT_FOUND);
   }
 
@@ -21,15 +21,15 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponseDto> handleIncompletePaymentException(
       IncompletePaymentException exception, HttpServletRequest httpServletRequest) {
     return new ResponseEntity<>(
-        new ErrorResponseDto(httpServletRequest.getRequestURI(), exception.getMessage()),
+        new ErrorResponseDto(exception.getMessage(), httpServletRequest.getRequestURI()),
         HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ErrorResponseDto> handleBadCredentialsException(
-        BadCredentialsException exception, HttpServletRequest httpServletRequest) {
-        return new ResponseEntity<>(
-            new ErrorResponseDto(httpServletRequest.getRequestURI(), exception.getMessage()),
-            HttpStatus.UNAUTHORIZED);
-    }
+  public ResponseEntity<ErrorResponseDto> handleBadCredentialsException(
+      BadCredentialsException exception, HttpServletRequest httpServletRequest) {
+    return new ResponseEntity<>(
+        new ErrorResponseDto(exception.getMessage(), httpServletRequest.getRequestURI()),
+        HttpStatus.UNAUTHORIZED);
+  }
 }
