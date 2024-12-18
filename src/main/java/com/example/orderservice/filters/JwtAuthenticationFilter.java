@@ -40,7 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String firstname = decodedJWT.getSubject();
         request.setAttribute("firstname", firstname);
 
-        if (request.getRequestURI().contains("api/v1/admin") && !decodedJWT.getClaim("role").asString().equals("ADMIN")) {
+        if (request.getRequestURI().contains("api/v1/admin")
+            && !decodedJWT.getClaim("role").asString().equals("ADMIN")) {
           response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
           return;
         }
@@ -60,6 +61,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
     filterChain.doFilter(request, response);
+  }
+
+  @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) {
+    String path = request.getServletPath();
+    return path.contains("/swagger-ui") || path.contains("/v3/api-docs");
   }
 
   public String extractJwtFromRequest(HttpServletRequest request) {
