@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
+/**
+ * The Book entity
+ */
 @Data
 @AllArgsConstructor
 @Builder

@@ -5,14 +5,37 @@ import com.example.orderservice.dto.request.PaymentDto;
 import com.example.orderservice.dto.response.OrderResponseDto;
 import com.example.orderservice.dto.response.PaymentResponseDto;
 import com.example.orderservice.model.Order;
-
 import java.util.List;
 
 public interface OrderService {
-    OrderResponseDto checkOut(OrderDto orderDto);
-    PaymentResponseDto orderPayment(PaymentDto paymentDto);
+  /**
+   * Checkout an order
+   *
+   * @param orderDto the order details
+   * @return the order response
+   */
+  OrderResponseDto checkOut(OrderDto orderDto);
 
-    List<Order> getAllOrders();
+    /**
+     * Make payment for an order
+     *
+     * @param paymentDto the payment details
+     * @return the payment response
+     */
+  PaymentResponseDto orderPayment(PaymentDto paymentDto);
 
-    List<Order> getAllOrders(Long userId);
+  /**
+   * Get all orders
+   *
+   * @return the list of orders
+   */
+  List<Order> getAllOrders();
+
+    /**
+     * Get all orders by user
+     *
+     * @param userId the user id
+     * @return the list of orders
+     */
+  List<Order> getAllOrders(Long userId);
 }
